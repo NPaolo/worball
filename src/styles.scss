@@ -1,1 +1,85 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@import "~bootstrap/dist/css/bootstrap.css";
+@import 'simple-keyboard/build/css/index.css';
+
+/* SAN FRANCISCO */
+@font-face{
+  font-family: 'SF-ultralight';
+  src: url('/assets/SF-Pro-Display-Ultralight.otf');
+}
+@font-face{
+  font-family: 'SF-light';
+  src: url('/assets/SF-Pro-Display-Light.ttf');
+}
+@font-face{
+  font-family: 'SF-bold';
+  src: url('/assets/SF-Pro-Display-Bold.otf');
+}
+@font-face{
+  font-family: 'SF-medium';
+  src: url('/assets/SF-Pro-Display-Medium.otf');
+}
+@font-face{
+  font-family: 'SF-regular';
+  src: url('/assets/SF-Pro-Display-Regular.otf');
+}
+@font-face{
+  font-family: 'SF-semibold';
+  src: url('/assets/SF-Pro-Display-Semibold.otf');
+}
+@font-face{
+  font-family: 'SF-black';
+  src: url('/assets/SF-Pro-Display-Black.ttf');
+}
+@font-face{
+  font-family: 'SF-heavy';
+  src: url('/assets/SF-Pro-Display-Heavy.ttf');
+}
+
+/* EINA */
+@font-face{
+  font-family: 'Eina-bold';
+  src: url('/assets/Eina03-Bold.ttf');
+}
+
+@font-face{
+  font-family: 'Eina-semibold';
+  src: url('/assets/Eina03-SemiBold.ttf');
+}
+
+@font-face{
+  font-family: 'Eina-regular';
+  src: url('/assets/Eina03-Regular.ttf');
+}
+
+@font-face{
+  font-family: 'Eina-light';
+  src: url('/assets/Eina03-Light.ttf');
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #30336b; }
+
+.text-heavy{
+  font-family: 'SF-heavy', sans-serif;
+}
+.text-bold{
+  font-family: 'Eina-bold', sans-serif;
+}
+.text-semibold, b{
+  font-family: 'Eina-semibold', sans-serif;
+}
+.text-regular{
+  font-family: 'Eina-regular', sans-serif;
+}
+.text-thin{
+  font-family: 'Eina-light', sans-serif;
+}
+
+mat-dialog-container {
+  background-color: #576574 !important;
+  color: whitesmoke !important;
+  mat-dialog-actions {
+    min-width: 300px;
+  }
+}
