@@ -135,7 +135,7 @@ export class HomeComponent implements OnInit {
 
     this.allowOnlyAlphabet(key);
     if (this.isLetter) {
-      if (this.curLetterIndex < (this.numSubmittedTries + 1) * this.wordLength && key !== 'Enter' && key !== 'Backspace' && key !== '{delete}') {
+      if (this.curLetterIndex < (this.numSubmittedTries + 1) * this.wordLength && key !== 'Enter' && key !== '{enter}' && key !== 'Backspace' && key !== '{delete}') {
         this.setLetter(key);
         this.curLetterIndex++;
       }
@@ -146,7 +146,7 @@ export class HomeComponent implements OnInit {
           this.setLetter('');
         }
       }
-      else if (key === 'Enter' && this.dialogState === 'close') {
+      else if ((key === 'Enter' || key === '{enter}') && this.dialogState === 'close') {
         this.checkCurrentTry();
       }
     }
@@ -161,7 +161,7 @@ export class HomeComponent implements OnInit {
   }
 
   allowOnlyAlphabet(letter: string) {
-    if (letter === 'Backspace' || letter === 'Enter') {
+    if (letter === 'Backspace' || letter === 'Enter' || letter === '{enter}' || letter === '{delete}') {
       this.isLetter = true;
     } else {
       for (let i = 0; i < this.keyboard.options.layout.default.length; i++) {

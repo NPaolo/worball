@@ -10,6 +10,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { MatButtonModule } from '@angular/material/button';
+import { NgxGoogleAnalyticsModule } from 'ngx-google-analytics';
 
 
 
@@ -27,7 +28,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatDialogModule,
     MatButtonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxGoogleAnalyticsModule.forRoot('G-Z7KXKM6680'),
   ],
   providers: [],
   bootstrap: [AppComponent]
