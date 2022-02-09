@@ -956,7 +956,7 @@ export const PLAYERS = [
   {
     "Quotazioni Fantacalcio": "2816",
     "FIELD2": "DEF",
-    "FIELD3": "DI LORENZO",
+    "FIELD3": "DILORENZO",
     "FIELD4": "Napoli",
     "FIELD5": "14",
     "FIELD6": "11",
@@ -1298,7 +1298,7 @@ export const PLAYERS = [
   {
     "Quotazioni Fantacalcio": "795",
     "FIELD2": "ATT",
-    "FIELD3": "EL SHAARAWY",
+    "FIELD3": "ELSHAARAWY",
     "FIELD4": "Roma",
     "FIELD5": "12",
     "FIELD6": "11",
@@ -1595,7 +1595,7 @@ export const PLAYERS = [
   {
     "Quotazioni Fantacalcio": "2011",
     "FIELD2": "MID",
-    "FIELD3": "MIGUEL VELOSO",
+    "FIELD3": "VELOSO",
     "FIELD4": "Verona",
     "FIELD5": "10",
     "FIELD6": "8",
@@ -1604,7 +1604,7 @@ export const PLAYERS = [
   {
     "Quotazioni Fantacalcio": "4220",
     "FIELD2": "MID",
-    "FIELD3": "ZAMBO ANGUISSA",
+    "FIELD3": "ANGUISSA",
     "FIELD4": "Napoli",
     "FIELD5": "10",
     "FIELD6": "7",
@@ -1847,7 +1847,7 @@ export const PLAYERS = [
   {
     "Quotazioni Fantacalcio": "5807",
     "FIELD2": "ATT",
-    "FIELD3": "JOVANE",
+    "FIELD3": "CABRAL",
     "FIELD4": "Lazio",
     "FIELD5": "9",
     "FIELD6": "9",
@@ -2180,7 +2180,7 @@ export const PLAYERS = [
   {
     "Quotazioni Fantacalcio": "322",
     "FIELD2": "DEF",
-    "FIELD3": "DE VRIJ",
+    "FIELD3": "DEVRIJ",
     "FIELD4": "Inter",
     "FIELD5": "7",
     "FIELD6": "14",
@@ -2261,7 +2261,7 @@ export const PLAYERS = [
   {
     "Quotazioni Fantacalcio": "256",
     "FIELD2": "DEF",
-    "FIELD3": "JUAN JESUS",
+    "FIELD3": "JUANJESUS",
     "FIELD4": "Napoli",
     "FIELD5": "7",
     "FIELD6": "3",
@@ -2333,7 +2333,7 @@ export const PLAYERS = [
   {
     "Quotazioni Fantacalcio": "4477",
     "FIELD2": "ATT",
-    "FIELD3": "LA MANTIA",
+    "FIELD3": "LAMANTIA",
     "FIELD4": "Empoli",
     "FIELD5": "7",
     "FIELD6": "7",
@@ -2405,7 +2405,7 @@ export const PLAYERS = [
   {
     "Quotazioni Fantacalcio": "662",
     "FIELD2": "DEF",
-    "FIELD3": "ALEX SANDRO",
+    "FIELD3": "ALEXSANDRO",
     "FIELD4": "Juventus",
     "FIELD5": "6",
     "FIELD6": "11",
@@ -3296,7 +3296,7 @@ export const PLAYERS = [
   {
     "Quotazioni Fantacalcio": "4884",
     "FIELD2": "ATT",
-    "FIELD3": "CARLES PEREZ",
+    "FIELD3": "PEREZ",
     "FIELD4": "Roma",
     "FIELD5": "4",
     "FIELD6": "8",
@@ -3467,7 +3467,7 @@ export const PLAYERS = [
   {
     "Quotazioni Fantacalcio": "2315",
     "FIELD2": "DEF",
-    "FIELD3": "STRYGER LARSEN",
+    "FIELD3": "STRYGERLARSEN",
     "FIELD4": "Udinese",
     "FIELD5": "3",
     "FIELD6": "7",
@@ -3917,7 +3917,7 @@ export const PLAYERS = [
   {
     "Quotazioni Fantacalcio": "2115",
     "FIELD2": "DEF",
-    "FIELD3": "DELLI CARRI",
+    "FIELD3": "DELLICARRI",
     "FIELD4": "Salernitana",
     "FIELD5": "2",
     "FIELD6": "1",
@@ -4583,7 +4583,7 @@ export const PLAYERS = [
   {
     "Quotazioni Fantacalcio": "5739",
     "FIELD2": "DEF",
-    "FIELD3": "DE WINTER",
+    "FIELD3": "DEWINTER",
     "FIELD4": "Juventus",
     "FIELD5": "1",
     "FIELD6": "1",
@@ -4619,7 +4619,7 @@ export const PLAYERS = [
   {
     "Quotazioni Fantacalcio": "5286",
     "FIELD2": "MID",
-    "FIELD3": "AKPA AKPRO",
+    "FIELD3": "AKPAAKPRO",
     "FIELD4": "Lazio",
     "FIELD5": "1",
     "FIELD6": "3",
@@ -4871,7 +4871,7 @@ export const PLAYERS = [
   {
     "Quotazioni Fantacalcio": "5505",
     "FIELD2": "ATT",
-    "FIELD3": "KAIO JORGE",
+    "FIELD3": "KAIOJORGE",
     "FIELD4": "Juventus",
     "FIELD5": "1",
     "FIELD6": "5",
