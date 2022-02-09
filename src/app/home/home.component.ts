@@ -186,10 +186,10 @@ export class HomeComponent implements OnInit {
 
     // Check if user has typed all the letters.
     if (curTry.letters.some(letter => letter.text === '')) {
-      this.openDialog('Not enough letters');
+      this.openDialog('Not enough letters', 'Ok', 3000);
       return;
     } else if (!this.PLAYERS_NAMES.includes(wordFromCurTry)) {
-      this.openDialog('Not a football player');
+      this.openDialog('Not a football player', 'Ok', 3000);
     } else {
       for (let i = 0; i < this.wordLength; i++) {
         const expected = this.playerName[i];
@@ -252,33 +252,37 @@ export class HomeComponent implements OnInit {
   
       // Check if all letters in the current try are correct.
       if (states.every(state => state === LetterState.FULL_MATCH)) {
-        this.openDialog('You won!');
+        this.openDialog('You won!', 'Share', 50000);
         this.won = true;
         return;
       } else{
         this.tryNumber++;
         if (this.tryNumber === 6) {
-          this.openDialog(`You lost! The player is ${this.playerName}` )
+          this.openDialog(`You lost! The player is ${this.playerName}`, 'Ok', 50000 )
         }
       }
     }
 
   }
 
-  openDialog(message: string, clipboardResult?: string) {
-    this.dialogState = 'open';
-    const dialogRef = this.dialog.open(DialogComponent,
-      {
-        data: {
-          message
-        }
-      });
-      dialogRef.afterClosed().subscribe(() => {
-        this.dialogState = 'close';
-        if (message === 'You won!') {
-          this.handleClickShare();
-        }
-      });
+  openDialog(message: string, action: string, duration: number) {
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+      this.openSnackBar(message, action, duration);
+    } else {
+      this.dialogState = 'open';
+      const dialogRef = this.dialog.open(DialogComponent,
+        {
+          data: {
+            message
+          }
+        });
+        dialogRef.afterClosed().subscribe(() => {
+          this.dialogState = 'close';
+          if (message === 'You won!') {
+            this.handleClickShare();
+          }
+        });
+    }
   }
   
 
@@ -306,7 +310,8 @@ export class HomeComponent implements OnInit {
   handleClickShare() {
     // 🟩🟨⬜
     // Copy results into clipboard.
-    let clipboardContent = `I guessed ${this.playerName} in ${this.numSubmittedTries}!        `;
+    let clipboardContent = `I guessed ${this.playerName} in ${this.numSubmittedTries}!
+    `;
     for (let i = 0; i < this.numSubmittedTries; i++) {
       for (let j = 0; j < this.wordLength; j++) {
         const letter = this.tries[i].letters[j];
@@ -327,13 +332,19 @@ export class HomeComponent implements OnInit {
       clipboardContent += '\n';
     }
     navigator.clipboard.writeText(clipboardContent);
-    this.openSnackBar('Result copied in your clipboard!', 'OK');
+    this.openSnackBar('Result copied in your clipboard!', 'OK', 4000);
   }
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 2000,
+  openSnackBar(message: string, action: string, duration: number) {
+    let snackBarRef = this._snackBar.open(message, action, {
+      duration,
     });
+
+    if (message === 'You won!') {
+      snackBarRef.onAction().subscribe(() => {
+        this.handleClickShare()
+      })
+    }
   }
 
 }
