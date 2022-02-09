@@ -3,6 +3,7 @@ import { PLAYERS } from '../app.constants';
 import Keyboard from 'simple-keyboard';
 import 'simple-keyboard/build/css/index.css';
 import { MatDialog } from '@angular/material/dialog';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import { DialogComponent } from '../dialog/dialog.component';
 
 
@@ -59,6 +60,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
+    private _snackBar: MatSnackBar,
   ) {
     this.player = this.PLAYERS[Math.floor(Math.random() * this.PLAYERS.length)];
     this.playerName = this.player.FIELD3;
@@ -263,7 +265,7 @@ export class HomeComponent implements OnInit {
 
   }
 
-  openDialog(message: string) {
+  openDialog(message: string, clipboardResult?: string) {
     this.dialogState = 'open';
     const dialogRef = this.dialog.open(DialogComponent,
       {
@@ -271,7 +273,12 @@ export class HomeComponent implements OnInit {
           message
         }
       });
-      dialogRef.afterClosed().subscribe(() => this.dialogState = 'close');
+      dialogRef.afterClosed().subscribe(() => {
+        this.dialogState = 'close';
+        if (message === 'You won!') {
+          this.handleClickShare();
+        }
+      });
   }
   
 
@@ -294,6 +301,39 @@ export class HomeComponent implements OnInit {
           return 'correct';
       }
     }
+  }
+
+  handleClickShare() {
+    // 🟩🟨⬜
+    // Copy results into clipboard.
+    let clipboardContent = `I guessed ${this.playerName} in ${this.numSubmittedTries}!        `;
+    for (let i = 0; i < this.numSubmittedTries; i++) {
+      for (let j = 0; j < this.wordLength; j++) {
+        const letter = this.tries[i].letters[j];
+        switch (letter.state) {
+          case LetterState.FULL_MATCH:
+            clipboardContent += '🟩';
+            break;
+          case LetterState.PARTIAL_MATCH:
+            clipboardContent += '🟨';
+            break;
+          case LetterState.WRONG:
+            clipboardContent += '⬜';
+            break;
+          default:
+            break;
+        }
+      }
+      clipboardContent += '\n';
+    }
+    navigator.clipboard.writeText(clipboardContent);
+    this.openSnackBar('Result copied in your clipboard!', 'OK');
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
 }

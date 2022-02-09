@@ -1046,7 +1046,7 @@ export const PLAYERS = [
   {
     "Quotazioni Fantacalcio": "4270",
     "FIELD2": "GK",
-    "FIELD3": "RUI PATRICIO",
+    "FIELD3": "RUIPATRICIO",
     "FIELD4": "Roma",
     "FIELD5": "13",
     "FIELD6": "14",
@@ -1055,7 +1055,7 @@ export const PLAYERS = [
   {
     "Quotazioni Fantacalcio": "4428",
     "FIELD2": "DEF",
-    "FIELD3": "DE LIGT",
+    "FIELD3": "DELIGT",
     "FIELD4": "Juventus",
     "FIELD5": "13",
     "FIELD6": "12",

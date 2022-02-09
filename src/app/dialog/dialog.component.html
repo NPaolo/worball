@@ -2,5 +2,6 @@
   {{data.message}}
 </div>
 <mat-dialog-actions align="end" class="text-semibold">
-  <button mat-raised-button mat-dialog-close>OK</button>
+  <button *ngIf="data.message !== 'You won!'" mat-raised-button mat-dialog-close>OK</button>
+  <button *ngIf="data.message === 'You won!'" mat-raised-button mat-dialog-close>Share</button>
 </mat-dialog-actions>
