@@ -1,5 +1,5 @@
 import {  Component, ElementRef, HostListener, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { PLAYERS } from '../app.constants';
+import { PLAYERS, SHUFFLED } from '../app.constants';
 import Keyboard from 'simple-keyboard';
 import 'simple-keyboard/build/css/index.css';
 import { MatDialog } from '@angular/material/dialog';
@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
   wordLength: number;
   wordLengthArray = [];
   readonly PLAYERS = PLAYERS;
+  readonly SHUFFLED = SHUFFLED;
   PLAYERS_NAMES = [];
   dialogState = 'close';
   value = "";
@@ -62,7 +63,8 @@ export class HomeComponent implements OnInit {
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
   ) {
-    this.player = this.PLAYERS[Math.floor(Math.random() * this.PLAYERS.length)];
+    let date = new Date();
+    this.player = this.PLAYERS[this.SHUFFLED[((date.getMonth()) * 30) + date.getDate()]];
     this.playerName = this.player.FIELD3;
     this.PLAYERS.forEach(player => {
       this.PLAYERS_NAMES.push(player.FIELD3)
