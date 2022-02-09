@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
   value = "";
   keyboard: Keyboard;
   tryNumber = 0;
+  date = new Date();
 
   won = false;
   readonly tries: Try[] = [];
@@ -63,8 +64,7 @@ export class HomeComponent implements OnInit {
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
   ) {
-    let date = new Date();
-    this.player = this.PLAYERS[this.SHUFFLED[((date.getMonth()) * 30) + date.getDate()]];
+    this.player = this.PLAYERS[this.SHUFFLED[((this.date.getMonth()) * 30) + this.date.getDate()]];
     this.playerName = this.player.FIELD3;
     this.PLAYERS.forEach(player => {
       this.PLAYERS_NAMES.push(player.FIELD3)
@@ -312,7 +312,7 @@ export class HomeComponent implements OnInit {
   handleClickShare() {
     // 🟩🟨⬜
     // Copy results into clipboard.
-    let clipboardContent = `I guessed ${this.playerName} in ${this.numSubmittedTries}!
+    let clipboardContent = `Worball n. ${((this.date.getMonth()) * 30) + this.date.getDate()}
     `;
     for (let i = 0; i < this.numSubmittedTries; i++) {
       for (let j = 0; j < this.wordLength; j++) {
