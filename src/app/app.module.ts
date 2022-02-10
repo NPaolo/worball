@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { DialogComponent } from './dialog/dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -27,7 +28,7 @@ import { NgxGoogleAnalyticsModule } from 'ngx-google-analytics';
     MatDialogModule,
     MatButtonModule,
     MatSnackBarModule,
-
+    MatIconModule,
     BrowserAnimationsModule,
     NgxGoogleAnalyticsModule.forRoot('G-Z7KXKM6680'),
   ],

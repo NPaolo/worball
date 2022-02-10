@@ -3987,15 +3987,6 @@ export const PLAYERS = [
     "FIELD7": "-5"
   },
   {
-    "Quotazioni Fantacalcio": "644",
-    "FIELD2": "MID",
-    "FIELD3": "PULGAR",
-    "FIELD4": "Fiorentina",
-    "FIELD5": "2",
-    "FIELD6": "8",
-    "FIELD7": "-6"
-  },
-  {
     "Quotazioni Fantacalcio": "1978",
     "FIELD2": "MID",
     "FIELD3": "SENSI",
