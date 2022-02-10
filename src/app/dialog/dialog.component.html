@@ -3,7 +3,7 @@
 </div>
 <mat-dialog-actions align="end" class="text-semibold">
   <button *ngIf="data.message !== 'You won!'" mat-raised-button mat-dialog-close>OK</button>
-  <button mat-raised-button mat-dialog-close>
+  <button *ngIf="data.message === 'You won!'" mat-raised-button mat-dialog-close>
     <mat-icon>share</mat-icon>
     Share
   </button>

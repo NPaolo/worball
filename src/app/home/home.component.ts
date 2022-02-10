@@ -191,7 +191,7 @@ export class HomeComponent implements OnInit {
       this.openDialog('Not enough letters', 'Ok', 3000);
       return;
     } else if (!this.PLAYERS_NAMES.includes(wordFromCurTry)) {
-      this.openDialog('Not a football player', 'Ok', 3000);
+      this.openDialog('Not a Serie A player', 'Ok', 3000);
     } else {
       for (let i = 0; i < this.wordLength; i++) {
         const expected = this.playerName[i];
