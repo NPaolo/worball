@@ -55,8 +55,10 @@ export class HomeComponent implements OnInit {
   won = false;
   readonly tries: Try[] = [];
   curLetterIndex = 0;
+  secondIndex = 0;
   readonly curLetterStates: {[key: string]: LetterState} = {};
   targetWordLetterCounts: {[letter: string]: number} = {};
+  tryWordLetterCounts: {[letter: string]: number} = {};
   numSubmittedTries = 0;
   isLetter: boolean;
 
@@ -79,7 +81,6 @@ export class HomeComponent implements OnInit {
       this.tries.push({letters});
     }
 
-  
       // Generate letter counts for target word.
       for (const letter of this.playerName) {
         const count = this.targetWordLetterCounts[letter];
@@ -142,12 +143,16 @@ export class HomeComponent implements OnInit {
       if (this.curLetterIndex < (this.numSubmittedTries + 1) * this.wordLength && key !== 'Enter' && key !== '{enter}' && key !== 'Backspace' && key !== '{delete}') {
         this.setLetter(key);
         this.curLetterIndex++;
+        this.secondIndex++;
       }
       else if (key === 'Backspace' || key === '{delete}') {
-        // Don't delete previous try.
-        if (this.curLetterIndex > this.numSubmittedTries * this.wordLength) {
-          this.curLetterIndex--;
-          this.setLetter('');
+        if (this.dialogState === 'close') {
+          if (this.curLetterIndex > this.numSubmittedTries * this.wordLength) {
+            this.updateTryWordLetterCounts('')
+            this.curLetterIndex--;
+            this.secondIndex--;
+            this.setLetter('');
+          }
         }
       }
       else if ((key === 'Enter' || key === '{enter}') && this.dialogState === 'close') {
@@ -161,11 +166,36 @@ export class HomeComponent implements OnInit {
       const tryIndex = Math.floor(this.curLetterIndex / this.wordLength);
       const letterIndex = this.curLetterIndex - tryIndex * this.wordLength;
       this.tries[tryIndex].letters[letterIndex].text = letter;
+      if (letter !== '') {
+        const count = this.tryWordLetterCounts[letter];
+        if (count == null) {
+          this.tryWordLetterCounts[letter] = 0;
+        }
+        this.tryWordLetterCounts[letter]++;
+      }
     }
   }
 
+  updateTryWordLetterCounts(letter: string) {
+    const curTry = this.tries[this.numSubmittedTries];
+    const wordFromCurTry = curTry.letters.map(letter => letter.text).join('').toUpperCase();
+    let secondIndex = Math.floor(this.secondIndex - 1);
+    if (letter === '') {
+      if (this.tryWordLetterCounts[wordFromCurTry[secondIndex].toLowerCase()] > 0) {
+        this.tryWordLetterCounts[wordFromCurTry[secondIndex].toLowerCase()]--;
+      }
+    } else {
+      const count = this.tryWordLetterCounts[letter];
+      if (count == null) {
+        this.tryWordLetterCounts[letter] = 0;
+      }
+      this.tryWordLetterCounts[letter]++;
+    }
+    console.log(this.tryWordLetterCounts)
+  }
+
   allowOnlyAlphabet(letter: string) {
-    if (letter === 'Backspace' || letter === 'Enter' || letter === '{enter}' || letter === '{delete}') {
+    if (letter === 'Backspace' || letter === 'Enter') {
       this.isLetter = true;
     } else {
       for (let i = 0; i < this.keyboard.options.layout.default.length; i++) {
@@ -184,6 +214,7 @@ export class HomeComponent implements OnInit {
     const curTry = this.tries[this.numSubmittedTries];
     const wordFromCurTry = curTry.letters.map(letter => letter.text).join('').toUpperCase();
     const targetWordLetterCounts = {...this.targetWordLetterCounts};
+    const tryWordLetterCounts = {...this.tryWordLetterCounts};
     const states: LetterState[] = [];
 
     // Check if user has typed all the letters.
@@ -193,6 +224,7 @@ export class HomeComponent implements OnInit {
     } else if (!this.PLAYERS_NAMES.includes(wordFromCurTry)) {
       this.openDialog('Not a Serie A player', 'Ok', 3000);
     } else {
+      this.secondIndex = 0;
       for (let i = 0; i < this.wordLength; i++) {
         const expected = this.playerName[i];
         const curLetter = curTry.letters[i];
@@ -201,14 +233,20 @@ export class HomeComponent implements OnInit {
   
         if (expected === got && targetWordLetterCounts[got] > 0) {
           targetWordLetterCounts[expected]--;
+          tryWordLetterCounts[got]--;
           state = LetterState.FULL_MATCH;
         } else if (this.playerName.includes(got) && targetWordLetterCounts[got] > 0) {
-          targetWordLetterCounts[got]--
-          state = LetterState.PARTIAL_MATCH;
+          if (tryWordLetterCounts[got.toLowerCase()] > targetWordLetterCounts[got]) {
+            tryWordLetterCounts[got.toLowerCase()]--;
+          } else {
+            targetWordLetterCounts[got]--;
+            state = LetterState.PARTIAL_MATCH;
+          }
         }
         states.push(state);
         curLetter.state = state;
         this.getLetterClass(curLetter);
+        this.tryWordLetterCounts = {};
       }
   
       // Get the current try.
@@ -264,7 +302,6 @@ export class HomeComponent implements OnInit {
         }
       }
     }
-
   }
 
   openDialog(message: string, action: string, duration: number) {
