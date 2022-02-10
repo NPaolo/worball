@@ -7,12 +7,15 @@ import { HomeComponent } from './home/home.component';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+
 import { DialogComponent } from './dialog/dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { MatButtonModule } from '@angular/material/button';
 import { NgxGoogleAnalyticsModule } from 'ngx-google-analytics';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import { NgxGoogleAnalyticsModule } from 'ngx-google-analytics';
     MatButtonModule,
     MatSnackBarModule,
     MatIconModule,
+    MatMenuModule,
     BrowserAnimationsModule,
     NgxGoogleAnalyticsModule.forRoot('G-Z7KXKM6680'),
   ],

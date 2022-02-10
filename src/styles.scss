@@ -76,6 +76,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
   font-family: 'Eina-light', sans-serif;
 }
 
+.text-purple {
+  color: #30336b !important;
+}
+
 mat-dialog-container {
   background-color: #576574 !important;
   color: whitesmoke !important;
@@ -86,4 +90,8 @@ mat-dialog-container {
 
 a:hover {
   color: unset;
+}
+
+.pointer {
+  cursor: pointer;
 }

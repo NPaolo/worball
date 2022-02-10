@@ -1,5 +1,24 @@
 <div class="container-fluid d-flex align-items-center flex-column text-semibold">
-  <h1 class="text-bold my-2">worball</h1>
+  <div class="header d-flex align-items-center">
+    <div class="title-container">
+      <h1 class="text-bold my-2">worball</h1>
+    </div>
+    <div class="info-container ">
+      <mat-icon class="pointer" [matMenuTriggerFor]="menu" #menuTrigger>info</mat-icon>
+      <mat-menu #menu="matMenu"  class="p-3 text-thin">
+        <small class="text-purple">
+          <b class="text-purple">Guess the Serie A player.</b><br>
+          You have 6 attempts.<br>
+          If a letter turns <b class="text-purple">green</b>, it's in the right spot.<br>
+          If it turns <b class="text-purple">yellow</b>, the letter is in the word but in the wrong spot.<br>
+          Otherwise, that letter is not in the word in any spot.
+        </small>
+        <div class="d-flex justify-content-end">
+          <button class="text-purple" mat-raised-button mat-dialog-close>Close</button>
+        </div>
+      </mat-menu>
+    </div>
+  </div>
   <small class="text-thin">just like <a href="https://www.powerlanguage.co.uk/wordle/" target="_blank">Wordle</a>, but with Serie A players</small>
   <div class="d-flex justify-content-center flex-column my-3">
     <div class="d-flex flex-column mb-3" style="max-width: 100vw;">
