@@ -310,10 +310,8 @@ export class HomeComponent implements OnInit {
   }
 
   handleClickShare() {
-    // 🟩🟨⬜
-    // Copy results into clipboard.
-    let clipboardContent = `Worball n. ${((this.date.getMonth()) * 30) + this.date.getDate()}
-    `;
+    let clipboardContent = ``;
+    clipboardContent += `Worball n. ${((this.date.getMonth()) * 30) + this.date.getDate()} \r`;
     for (let i = 0; i < this.numSubmittedTries; i++) {
       for (let j = 0; j < this.wordLength; j++) {
         const letter = this.tries[i].letters[j];
