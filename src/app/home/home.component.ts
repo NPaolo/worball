@@ -348,7 +348,7 @@ export class HomeComponent implements OnInit {
 
   handleClickShare() {
     let clipboardContent = ``;
-    clipboardContent += `Worball n. ${((this.date.getMonth()) * 30) + this.date.getDate()} \n`;
+    clipboardContent += `Worball n. ${((this.date.getMonth()) * 30) + this.date.getDate()} \n \n`;
     for (let i = 0; i < this.numSubmittedTries; i++) {
       for (let j = 0; j < this.wordLength; j++) {
         const letter = this.tries[i].letters[j];
@@ -368,6 +368,7 @@ export class HomeComponent implements OnInit {
       }
       clipboardContent += '\n';
     }
+    clipboardContent += '\n https://worball.netlify.app'
     navigator.clipboard.writeText(clipboardContent);
     this.openSnackBar('Result copied in your clipboard!', 'OK', 4000);
   }
