@@ -1,5 +1,5 @@
 <div class="container-fluid d-flex align-items-center flex-column text-semibold">
-  <app-header></app-header>
+  <app-header class="w-50"></app-header>
   <small class="text-thin">just like <a href="https://www.powerlanguage.co.uk/wordle/" target="_blank">Wordle</a>, but with Serie A players</small>
   <div class="d-flex justify-content-center flex-column my-3">
     <div class="d-flex flex-column mb-3" style="max-width: 100vw;">
@@ -16,9 +16,9 @@
       <div *ngIf="tryNumber > 0">
         <span class="text-regular">Role: </span>{{ player.role }}
       </div>
-      <div *ngIf="tryNumber > 1">
-        <span class="text-regular">Team: </span>{{ player.team }}
-      </div>
+      <!-- <div *ngIf="tryNumber > 1">
+        <span class="text-regular">Team: </span>{{ player.FIELD4 }}
+      </div> -->
     </div>
   </div>
 	<!-- <input type="text" (input)="onInputChange($event)" class="my-4" value={{value}} placeholder="Tap on the virtual keyboard to start" /> -->

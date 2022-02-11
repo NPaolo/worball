@@ -1,0 +1,26 @@
+<div class="header d-flex align-items-center">
+  <!-- <div>
+    <mat-icon class="pointer" [matMenuTriggerFor]="mode" #modeTrigger>menu</mat-icon>
+    <mat-menu #mode="matMenu" class="p-3 text-semibold bg-purple">
+      <small class="pointer text-white" (click)="goTo('premier-league')">Premier League</small>
+    </mat-menu>
+  </div> -->
+  <div class="title-container">
+    <h1 class="text-bold my-2">worball</h1>
+  </div>
+  <div class="info-container ">
+    <mat-icon class="pointer" [matMenuTriggerFor]="rules" #rulesTrigger>info_outline</mat-icon>
+    <mat-menu #rules="matMenu"  class="p-3 text-thin text-white bg-semi-purple">
+      <small class="text-white">
+        <b class="text-white">Guess the Serie A player.</b><br>
+        You have 6 attempts.<br>
+        If a letter turns <b class="text-white">green</b>, it's in the right spot.<br>
+        If it turns <b class="text-white">yellow</b>, the letter is in the word but in the wrong spot.<br>
+        Otherwise, that letter is not in the word in any spot.
+      </small>
+      <div class="d-flex justify-content-end">
+        <button class="text-purple" mat-raised-button mat-dialog-close>Close</button>
+      </div>
+    </mat-menu>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 import {  Component, ElementRef, HostListener, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { PLAYERS, SHUFFLED } from '../app.constants';
+import { PLAYERS, PREMIER_PLAYERS, SHUFFLED } from '../app.constants';
 import Keyboard from 'simple-keyboard';
 import 'simple-keyboard/build/css/index.css';
 import { MatDialog } from '@angular/material/dialog';
@@ -33,17 +33,17 @@ enum LetterState {
 
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-premier-league',
+  templateUrl: './premier-league.component.html',
+  styleUrls: ['./premier-league.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class PremierLeagueComponent implements OnInit {
   @ViewChildren('tryContainer') tryContainers!: QueryList<ElementRef>;
   player: any;
   playerName: string;
   wordLength: number;
   wordLengthArray = [];
-  readonly PLAYERS = PLAYERS;
+  readonly PREMIER_PLAYERS = PREMIER_PLAYERS;
   readonly SHUFFLED = SHUFFLED;
   PLAYERS_NAMES = [];
   dialogState = 'close';
@@ -66,9 +66,12 @@ export class HomeComponent implements OnInit {
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
   ) {
-    this.player = this.PLAYERS[this.SHUFFLED[((this.date.getMonth()) * 30) + this.date.getDate()]];
+    this.PREMIER_PLAYERS.forEach(player => {
+      player.second_name = player.second_name.toUpperCase();
+    })
+    this.player = this.PREMIER_PLAYERS[this.SHUFFLED[((this.date.getMonth()) * 30) + this.date.getDate()]];
     this.playerName = this.player.second_name;
-    this.PLAYERS.forEach(player => {
+    this.PREMIER_PLAYERS.forEach(player => {
       this.PLAYERS_NAMES.push(player.second_name)
     });
     this.wordLengthArray = this.playerName.split('');
@@ -124,7 +127,7 @@ export class HomeComponent implements OnInit {
   };
 
   getRandomPlayer() {
-    this.playerName = this.PLAYERS[Math.floor(Math.random() * this.PLAYERS.length)].second_name;
+    this.playerName = this.PREMIER_PLAYERS[Math.floor(Math.random() * this.PREMIER_PLAYERS.length)].second_name;
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -384,5 +387,4 @@ export class HomeComponent implements OnInit {
       })
     }
   }
-
 }

@@ -80,6 +80,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
   color: #30336b !important;
 }
 
+.bg-purple {
+  background-color: #30336b !important;
+}
+.bg-semi-purple {
+  background-color: #646690 !important;
+}
+
+
 mat-dialog-container {
   background-color: #576574 !important;
   color: whitesmoke !important;
@@ -94,4 +102,52 @@ a:hover {
 
 .pointer {
   cursor: pointer;
+}
+
+
+.single-row {
+  margin-bottom: 5px !important;
+}
+
+.letter-card {
+  width: 50px;
+  height: 50px;
+  box-shadow: 4px 6px 4px -1px rgba(0,0,0,0.39);
+  background-color: #ffffff48;
+  margin-right: 5px;
+  padding-top: 13px;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+.wrong {
+  background-color: darkgrey;
+}
+
+.partially-wrong {
+  background-color: #feca57;
+}
+
+.correct {
+  background-color: #2ecc71;
+}
+
+.hg-button[disabled] {
+  pointer-events: none;
+}
+
+@media (max-width: 992px) {
+  .simple-keyboard {
+    width: 100vw;
+  }
+}
+
+@media (min-width: 993px) {
+  .simple-keyboard {
+    width: 50%;
+  }
+}
+
+.info-container {
+  padding-left: 30%;
 }
