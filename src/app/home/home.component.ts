@@ -375,6 +375,7 @@ export class HomeComponent implements OnInit {
     this.curLetterIndex = 0;
     this.secondIndex = 0;
     this.numSubmittedTries = 0;
+    this.tryNumber = 0;
     this.ITALY_PLAYERS = ITALY_PLAYERS.map(a => ({...a}));
     this.PREMIER_PLAYERS = PREMIER_PLAYERS.map(a => ({...a}));
     this.NBA_PLAYERS = GLOBAL_NBA_PLAYERS.map(a => ({...a}));
