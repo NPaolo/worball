@@ -2,3 +2,9 @@
   color: whitesmoke;
 }
 
+@media (max-width: 992px) {
+  .header {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+}

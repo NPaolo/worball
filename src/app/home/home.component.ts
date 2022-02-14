@@ -1,10 +1,11 @@
 import {  Component, ElementRef, HostListener, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { PLAYERS, SHUFFLED } from '../app.constants';
+import { ITALY_PLAYERS, GLOBAL_NBA_PLAYERS, PREMIER_PLAYERS, SHUFFLED } from '../app.constants';
 import Keyboard from 'simple-keyboard';
 import 'simple-keyboard/build/css/index.css';
 import { MatDialog } from '@angular/material/dialog';
-import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { DialogComponent } from '../dialog/dialog.component';
+import { HttpClient } from '@angular/common/http';
 
 
 const NUM_TRIES = 6;
@@ -43,8 +44,10 @@ export class HomeComponent implements OnInit {
   playerName: string;
   wordLength: number;
   wordLengthArray = [];
-  readonly PLAYERS = PLAYERS;
-  readonly SHUFFLED = SHUFFLED;
+  ITALY_PLAYERS = ITALY_PLAYERS;
+  PREMIER_PLAYERS = PREMIER_PLAYERS;
+  NBA_PLAYERS = GLOBAL_NBA_PLAYERS;
+  SHUFFLED = SHUFFLED;
   PLAYERS_NAMES = [];
   dialogState = 'close';
   value = "";
@@ -53,7 +56,7 @@ export class HomeComponent implements OnInit {
   date = new Date();
 
   won = false;
-  readonly tries: Try[] = [];
+  tries: Try[] = [];
   curLetterIndex = 0;
   secondIndex = 0;
   readonly curLetterStates: {[key: string]: LetterState} = {};
@@ -61,51 +64,30 @@ export class HomeComponent implements OnInit {
   tryWordLetterCounts: {[letter: string]: number} = {};
   numSubmittedTries = 0;
   isLetter: boolean;
+  tournament = 'Serie A';
 
   constructor(
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
   ) {
-    this.player = this.PLAYERS[this.SHUFFLED[((this.date.getMonth()) * 30) + this.date.getDate()]];
-    this.playerName = this.player.second_name;
-    this.PLAYERS.forEach(player => {
-      this.PLAYERS_NAMES.push(player.second_name)
-    });
-    this.wordLengthArray = this.playerName.split('');
-    this.wordLength = this.wordLengthArray.length;
-    for (let i = 0; i < NUM_TRIES; i++) {
-      const letters: Letter[] = [];
-      for (let j = 0; j < this.wordLength; j++) {
-        letters.push({text: '', state: LetterState.PENDING});
-      }
-      this.tries.push({letters});
-    }
-
-      // Generate letter counts for target word.
-      for (const letter of this.playerName) {
-        const count = this.targetWordLetterCounts[letter];
-        if (count == null) {
-          this.targetWordLetterCounts[letter] = 0;
-        }
-        this.targetWordLetterCounts[letter]++;
-      }
     }
 
   ngOnInit(): void {
+    this.initContent();
   }
 
   ngAfterViewInit() {
     this.keyboard = new Keyboard({
-      useButtonTag: true,
       onChange: input => this.onChange(input),
       onKeyPress: button => this.onKeyPress(button)
     });
     this.keyboard.setOptions({
+      useButtonTag: true,
       layout: {
         default: [
-          "q w e r t y u i o p {delete}",
+          "q w e r t y u i o p",
           "a s d f g h j k l",
-          "z x c v b n m {enter}",
+          "{enter} z x c v b n m {delete}",
         ],
       },
     });
@@ -122,10 +104,6 @@ export class HomeComponent implements OnInit {
   onInputChange = (event: any) => {
     this.keyboard.setInput(event.target.value);
   };
-
-  getRandomPlayer() {
-    this.playerName = this.PLAYERS[Math.floor(Math.random() * this.PLAYERS.length)].second_name;
-  }
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -222,7 +200,7 @@ export class HomeComponent implements OnInit {
       this.openDialog('Not enough letters', 'Ok', 3000);
       return;
     } else if (!this.PLAYERS_NAMES.includes(wordFromCurTry)) {
-      this.openDialog('Not a Serie A player', 'Ok', 3000);
+      this.openDialog(`Not a ${this.tournament} player`, 'Ok', 3000);
     } else {
       this.secondIndex = 0;
       for (let i = 0; i < this.wordLength; i++) {
@@ -348,7 +326,7 @@ export class HomeComponent implements OnInit {
 
   handleClickShare() {
     let clipboardContent = ``;
-    clipboardContent += `Worball n. ${((this.date.getMonth()) * 30) + this.date.getDate()} \n \n`;
+    clipboardContent += `Worball ${this.tournament} n.${((this.date.getMonth()) * 30) + this.date.getDate()} \n \n`;
     for (let i = 0; i < this.numSubmittedTries; i++) {
       for (let j = 0; j < this.wordLength; j++) {
         const letter = this.tries[i].letters[j];
@@ -382,6 +360,68 @@ export class HomeComponent implements OnInit {
       snackBarRef.onAction().subscribe(() => {
         this.handleClickShare()
       })
+    }
+  }
+
+  setTournament(tournament: string) {
+    this.tournament = tournament;
+    this.won = false;
+    this.resetContent();
+    this.initContent();
+  }
+
+  resetContent() {
+    this.tries = [];
+    this.curLetterIndex = 0;
+    this.secondIndex = 0;
+    this.numSubmittedTries = 0;
+    this.ITALY_PLAYERS = ITALY_PLAYERS.map(a => ({...a}));
+    this.PREMIER_PLAYERS = PREMIER_PLAYERS.map(a => ({...a}));
+    this.NBA_PLAYERS = GLOBAL_NBA_PLAYERS.map(a => ({...a}));
+    this.PLAYERS_NAMES = [];
+  }
+
+  initContent() {
+    switch (this.tournament) {
+      case 'Serie A':
+        this.player = this.ITALY_PLAYERS[this.SHUFFLED[((this.date.getMonth()) * 30) + this.date.getDate()]];
+        this.playerName = this.player.second_name;
+        this.ITALY_PLAYERS.forEach(player => {
+          this.PLAYERS_NAMES.push(player.second_name)
+        });
+        break;
+      case 'NBA':
+        this.NBA_PLAYERS.forEach(player => {
+          player.second_name = player.second_name.split(' ').slice(1).join(' ').toUpperCase();
+          player.second_name = player.second_name.replace(/['"]+/g, '');
+          player.second_name = player.second_name.replace(/-/g, "");
+          player.second_name = player.second_name.replace(/\s/g, '');
+        })
+        this.player = this.NBA_PLAYERS[this.SHUFFLED[((this.date.getMonth()) * 30) + this.date.getDate()]];
+        this.playerName = this.player.second_name;
+        this.NBA_PLAYERS.forEach(player => {
+          this.PLAYERS_NAMES.push(player.second_name)
+        });
+        console.log(this.PLAYERS_NAMES);
+        break;
+    }
+    this.wordLengthArray = this.playerName.split('');
+    this.wordLength = this.wordLengthArray.length;
+    for (let i = 0; i < NUM_TRIES; i++) {
+      const letters: Letter[] = [];
+      for (let j = 0; j < this.wordLength; j++) {
+        letters.push({text: '', state: LetterState.PENDING});
+      }
+      this.tries.push({letters});
+    }
+
+    // Generate letter counts for target word.
+    for (const letter of this.playerName) {
+      const count = this.targetWordLetterCounts[letter];
+      if (count == null) {
+        this.targetWordLetterCounts[letter] = 0;
+      }
+      this.targetWordLetterCounts[letter]++;
     }
   }
 

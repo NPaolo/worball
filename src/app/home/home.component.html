@@ -1,6 +1,43 @@
 <div class="container-fluid d-flex align-items-center flex-column text-semibold">
-  <app-header></app-header>
-  <small class="text-thin">just like <a href="https://www.powerlanguage.co.uk/wordle/" target="_blank">Wordle</a>, but with Serie A players</small>
+
+  <div class="header d-flex align-items-center justify-content-around w-50">
+    <div>
+      <mat-icon class="pointer" [matMenuTriggerFor]="mode" #modeTrigger>menu</mat-icon>
+      <mat-menu #mode="matMenu" class="p-3 text-semibold bg-purple">
+        <!-- <div class="pointer text-white" (click)="setTournament('Premier League')" *ngIf="tournament === 'Serie A'">
+          <small>Premier League</small>
+        </div> -->
+        <div class="pointer text-white d-flex align-items-end justify-content-between" (click)="setTournament('NBA')" *ngIf="tournament === 'Serie A'">
+          <small>NBA</small>
+          <mat-icon>sports_basketball</mat-icon>
+        </div>
+        <div class="pointer text-white d-flex align-items-end justify-content-between" (click)="setTournament('Serie A')" *ngIf="tournament === 'NBA'">
+          <small>Serie A</small>
+          <mat-icon>sports_soccer</mat-icon>
+        </div>
+      </mat-menu>
+    </div>
+    <div class="title-container">
+      <h1 class="text-bold my-2">worball</h1>
+    </div>
+    <div class="info-container ">
+      <mat-icon class="pointer" [matMenuTriggerFor]="rules" #rulesTrigger>info_outline</mat-icon>
+      <mat-menu #rules="matMenu"  class="p-3 text-thin text-white bg-semi-purple">
+        <small class="text-white">
+          <b class="text-white">Guess the {{tournament}} player.</b><br>
+          You have 6 attempts.<br>
+          If a letter turns <b class="text-white">green</b>, it's in the right spot.<br>
+          If it turns <b class="text-white">yellow</b>, the letter is in the word but in the wrong spot.<br>
+          Otherwise, that letter is not in the word in any spot.
+        </small>
+        <div class="d-flex justify-content-end">
+          <button class="text-purple" mat-raised-button mat-dialog-close>Close</button>
+        </div>
+      </mat-menu>
+    </div>
+  </div>
+
+  <small class="text-thin">just like <a href="https://www.powerlanguage.co.uk/wordle/" target="_blank">Wordle</a>, but with <b>{{tournament}}</b> players</small>
   <div class="d-flex justify-content-center flex-column my-3">
     <div class="d-flex flex-column mb-3" style="max-width: 100vw;">
       <div *ngFor="let try of tries" class="d-flex single-row" #tryContainer>
@@ -13,21 +50,18 @@
       </div>
     </div>
     <div class="hints d-flex justify-content-around">
-      <div *ngIf="tryNumber > 0">
+      <div *ngIf="tryNumber > 1">
         <span class="text-regular">Role: </span>{{ player.role }}
       </div>
-      <div *ngIf="tryNumber > 1">
+      <div *ngIf="tryNumber > 2">
         <span class="text-regular">Team: </span>{{ player.team }}
       </div>
     </div>
   </div>
-	<!-- <input type="text" (input)="onInputChange($event)" class="my-4" value={{value}} placeholder="Tap on the virtual keyboard to start" /> -->
-	<div class="simple-keyboard mt-2"></div>
-  <div class="d-flex-justify-content-center mt-5 text-thin">
+	<div class="simple-keyboard"></div>
+  <div class="d-flex-justify-content-center mt-3 text-thin">
     <small>
       Designed by <a class="text-semibold" target="_blank" href="https://paolonazzaro.netlify.app">Paolo Nazzaro</a>
     </small>
   </div>
 </div>
-
-

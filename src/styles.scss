@@ -132,13 +132,19 @@ a:hover {
   background-color: #2ecc71;
 }
 
-.hg-button[disabled] {
-  pointer-events: none;
-}
-
 @media (max-width: 992px) {
   .simple-keyboard {
     width: 100vw;
+  }
+  .hg-button:active {
+    background-color: darkgrey !important;
+    transition-duration: 0.1s;
+  }
+  .hg-button-delete:active {
+    background-color: #ff6b6b !important;
+  }
+  .hg-button-enter:active {
+    background-color: #2ecc71 !important;
   }
 }
 
@@ -146,8 +152,38 @@ a:hover {
   .simple-keyboard {
     width: 50%;
   }
+  .hg-button:hover {
+    background-color: darkgrey !important;
+    transition-duration: 0.1s;
+  }
+  .hg-button-delete:hover {
+    background-color: #ff6b6b !important;
+  }
+  .hg-button-enter:hover {
+    background-color: #2ecc71 !important;
+  }
 }
 
 .info-container {
-  padding-left: 30%;
+  // padding-left: 30%;
 }
+
+.simple-keyboard {
+  // background: transparent !important;
+}
+.hg-button {
+  // font-family: 'Eina-regular';
+  // text-transform: uppercase;
+  // height: 53px !important;
+  // background-color: #dfe6e9 !important;
+  background-color: whitesmoke !important;
+}
+.hg-button[disabled] {
+  pointer-events: none;
+}
+.hg-functionBtn  {
+  // background-color: #fdd4d4 !important;
+  color: black;
+  background-color: lightgrey !important;
+}
+

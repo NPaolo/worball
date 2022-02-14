@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  @Input() page: string;
 
   constructor(
     private router: Router
@@ -15,8 +16,5 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  goTo(route: string) {
-    this.router.navigateByUrl('premier-league');
-  }
 
 }
