@@ -8,3 +8,17 @@
     justify-content: space-between !important;
   }
 }
+
+.tournament-btn {
+  height: 5rem;
+  background-color: #ffffff48;
+  display: flex;
+  align-items: center;
+  width: 13rem;
+  border-radius: 8px;
+  border: 0px;
+}
+.tournament-btn:hover {
+  background-color: #30336b;
+  transition-duration: 0.3s;
+}

@@ -5,7 +5,7 @@ import 'simple-keyboard/build/css/index.css';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { DialogComponent } from '../dialog/dialog.component';
-import { HttpClient } from '@angular/common/http';
+import {MatRippleModule} from '@angular/material/core';
 
 
 const NUM_TRIES = 6;
@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
   tryWordLetterCounts: {[letter: string]: number} = {};
   numSubmittedTries = 0;
   isLetter: boolean;
-  tournament = 'Serie A';
+  tournament: string;
 
   constructor(
     public dialog: MatDialog,
@@ -73,7 +73,6 @@ export class HomeComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.initContent();
   }
 
   ngAfterViewInit() {
@@ -376,6 +375,8 @@ export class HomeComponent implements OnInit {
     this.secondIndex = 0;
     this.numSubmittedTries = 0;
     this.tryNumber = 0;
+    this.targetWordLetterCounts = {};
+    this.tryWordLetterCounts = {};
     this.ITALY_PLAYERS = ITALY_PLAYERS.map(a => ({...a}));
     this.PREMIER_PLAYERS = PREMIER_PLAYERS.map(a => ({...a}));
     this.NBA_PLAYERS = GLOBAL_NBA_PLAYERS.map(a => ({...a}));
@@ -403,7 +404,6 @@ export class HomeComponent implements OnInit {
         this.NBA_PLAYERS.forEach(player => {
           this.PLAYERS_NAMES.push(player.second_name)
         });
-        console.log(this.PLAYERS_NAMES);
         break;
     }
     this.wordLengthArray = this.playerName.split('');
