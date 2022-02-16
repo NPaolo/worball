@@ -89,6 +89,20 @@ export class SerieAComponent {
           "{enter} z x c v b n m {delete}",
         ],
       },
+      buttonTheme: [
+        {
+          class: "hg-green",
+          buttons: ""
+        },
+        {
+          class: "hg-yellow",
+          buttons: ""
+        },
+        {
+          class: "hg-grey",
+          buttons: ""
+        },
+      ]
     });
   }
 
@@ -211,13 +225,17 @@ export class SerieAComponent {
           targetWordLetterCounts[expected]--;
           tryWordLetterCounts[got]--;
           state = LetterState.FULL_MATCH;
+          this.keyboard.addButtonTheme(got.toLowerCase(), "hg-green")
         } else if (this.playerName.includes(got) && targetWordLetterCounts[got] > 0) {
           if (tryWordLetterCounts[got.toLowerCase()] > targetWordLetterCounts[got]) {
             tryWordLetterCounts[got.toLowerCase()]--;
           } else {
             targetWordLetterCounts[got]--;
             state = LetterState.PARTIAL_MATCH;
+            this.keyboard.addButtonTheme(got.toLowerCase(), "hg-yellow")
           }
+        } else {
+          this.keyboard.addButtonTheme(got.toLowerCase(), "hg-grey")
         }
         states.push(state);
         curLetter.state = state;
