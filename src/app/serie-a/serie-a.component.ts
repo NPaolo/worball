@@ -225,6 +225,7 @@ export class SerieAComponent {
           targetWordLetterCounts[expected]--;
           tryWordLetterCounts[got]--;
           state = LetterState.FULL_MATCH;
+          this.keyboard.removeButtonTheme(got.toLowerCase(), "hg-yellow")
           this.keyboard.addButtonTheme(got.toLowerCase(), "hg-green")
         } else if (this.playerName.includes(got) && targetWordLetterCounts[got] > 0) {
           if (tryWordLetterCounts[got.toLowerCase()] > targetWordLetterCounts[got]) {
@@ -232,8 +233,9 @@ export class SerieAComponent {
           } else {
             targetWordLetterCounts[got]--;
             state = LetterState.PARTIAL_MATCH;
-            this.keyboard.addButtonTheme(got.toLowerCase(), "hg-yellow")
-          }
+            if (this.keyboard.getButtonThemeClasses(got.toLowerCase())[0] !== 'hg-green') {
+              this.keyboard.addButtonTheme(got.toLowerCase(), "hg-yellow");
+            }          }
         } else {
           this.keyboard.addButtonTheme(got.toLowerCase(), "hg-grey")
         }
