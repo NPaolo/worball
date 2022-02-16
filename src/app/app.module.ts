@@ -16,13 +16,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxGoogleAnalyticsModule } from 'ngx-google-analytics';
 import { HeaderComponent } from './header/header.component';
+import { NbaComponent } from './nba/nba.component';
+import { SerieAComponent } from './serie-a/serie-a.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DialogComponent,
-    HeaderComponent
+    HeaderComponent,
+    NbaComponent,
+    SerieAComponent
   ],
   imports: [
     BrowserModule,

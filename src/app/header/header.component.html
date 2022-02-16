@@ -1,31 +1,41 @@
-<!-- <div class="header d-flex align-items-center justify-content-around">
-  <div>
-    <mat-icon class="pointer" [matMenuTriggerFor]="mode" #modeTrigger>menu</mat-icon>
-    <mat-menu #mode="matMenu" class="p-3 text-semibold bg-purple">
-      <div class="pointer text-white" (click)="setTournament('premier-league')">
-        <small>Premier League</small>
-      </div>
-      <div class="pointer text-white" (click)="setTournament('serie-a')">
-        <small>Serie A</small>
-      </div>
-    </mat-menu>
+<div class="d-flex flex-column">
+  <div class="header d-flex align-items-center justify-content-around">
+    <div [style.opacity] = "league ? '0' : '0'">
+      <mat-icon class="pointer" [matMenuTriggerFor]="mode" #modeTrigger>menu</mat-icon>
+      <mat-menu #mode="matMenu" class="text-semibold bg-purple">
+        <button mat-menu-item *ngIf="league" (click)="goTo('')">
+          <mat-icon class="text-white">home</mat-icon>
+          <span class="text-regular">Home</span>
+        </button>
+        <button mat-menu-item *ngIf="league === 'NBA'" (click)="goTo('serie-a')">
+          <mat-icon class="text-white">sports_soccer</mat-icon>
+          <span class="text-regular">Serie A</span>
+        </button>
+        <button mat-menu-item *ngIf="league === 'Serie A'" (click)="goTo('nba')">
+          <mat-icon class="text-white">sports_basketball</mat-icon>
+          <span class="text-regular">NBA</span>
+        </button>
+      </mat-menu>
+    </div>
+    <div class="title-container" (click)="goTo('')">
+      <h1 class="text-bold my-2 pointer">worball</h1>
+    </div>
+    <div class="info-container ">
+      <mat-icon class="pointer" [matMenuTriggerFor]="rules" #rulesTrigger>info_outline</mat-icon>
+      <mat-menu #rules="matMenu"  class="p-3 text-thin text-white bg-semi-purple">
+        <small class="text-white">
+          <b class="text-white">Guess the {{league}} player.</b><br>
+          You have 6 attempts.<br>
+          If a letter turns <b class="text-white">green</b>, it's in the right spot.<br>
+          If it turns <b class="text-white">yellow</b>, the letter is in the word but in the wrong spot.<br>
+          Otherwise, that letter is not in the word in any spot.
+        </small>
+        <div class="d-flex justify-content-end">
+          <button class="text-purple" mat-raised-button mat-dialog-close>Close</button>
+        </div>
+      </mat-menu>
+    </div>
   </div>
-  <div class="title-container">
-    <h1 class="text-bold my-2">worball</h1>
-  </div>
-  <div class="info-container ">
-    <mat-icon class="pointer" [matMenuTriggerFor]="rules" #rulesTrigger>info_outline</mat-icon>
-    <mat-menu #rules="matMenu"  class="p-3 text-thin text-white bg-semi-purple">
-      <small class="text-white">
-        <b class="text-white">Guess the Serie A player.</b><br>
-        You have 6 attempts.<br>
-        If a letter turns <b class="text-white">green</b>, it's in the right spot.<br>
-        If it turns <b class="text-white">yellow</b>, the letter is in the word but in the wrong spot.<br>
-        Otherwise, that letter is not in the word in any spot.
-      </small>
-      <div class="d-flex justify-content-end">
-        <button class="text-purple" mat-raised-button mat-dialog-close>Close</button>
-      </div>
-    </mat-menu>
-  </div>
-</div> -->
+  <small class="text-thin text-center">just like <a href="https://www.powerlanguage.co.uk/wordle/" target="_blank">Wordle</a>, but with <b>{{league}}</b> players</small>
+</div>
+

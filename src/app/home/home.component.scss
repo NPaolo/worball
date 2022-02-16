@@ -2,14 +2,7 @@
   color: whitesmoke;
 }
 
-@media (max-width: 992px) {
-  .header {
-    width: 100% !important;
-    justify-content: space-between !important;
-  }
-}
-
-.tournament-btn {
+.league-btn {
   height: 5rem;
   background-color: #ffffff48;
   display: flex;
@@ -18,7 +11,7 @@
   border-radius: 8px;
   border: 0px;
 }
-.tournament-btn:hover {
+.league-btn:hover {
   background-color: #30336b;
   transition-duration: 0.3s;
 }

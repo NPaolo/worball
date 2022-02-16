@@ -146,6 +146,9 @@ a:hover {
   .hg-button-enter:active {
     background-color: #2ecc71 !important;
   }
+  app-header {
+    width: 100% !important;
+  }
 }
 
 @media (min-width: 993px) {
@@ -161,6 +164,9 @@ a:hover {
   }
   .hg-button-enter:hover {
     background-color: #2ecc71 !important;
+  }
+  app-header {
+    width: 50% !important;
   }
 }
 

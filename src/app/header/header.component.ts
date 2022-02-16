@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  @Input() page: string;
+  @Input() league: string;
 
   constructor(
     private router: Router
@@ -16,5 +16,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  goTo(route: string) {
+    this.league = route;
+    this.router.navigateByUrl(route)
+  }
 
 }

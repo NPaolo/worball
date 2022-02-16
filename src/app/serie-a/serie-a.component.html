@@ -1,0 +1,28 @@
+<div class="container-fluid d-flex align-items-center flex-column text-semibold">
+
+  <app-header [league]="league"></app-header>
+
+    <div class="d-flex justify-content-center flex-column my-3">
+      <div class="d-flex flex-column mb-3" style="max-width: 100vw;">
+        <div *ngFor="let try of tries" class="d-flex single-row" #tryContainer>
+          <div class="letter-card text-center" *ngFor="let letter of try.letters"
+            [ngClass]="getLetterClass(letter)">
+            <b>
+              {{letter.text}}
+            </b>
+          </div>
+        </div>
+      </div>
+      <div class="hints d-flex justify-content-around">
+        <div *ngIf="tryNumber > 1" class="text-white">
+          <span class="text-regular ">Role: </span>{{ player.role }}
+        </div>
+        <div *ngIf="tryNumber > 2" class="text-white">
+          <span class="text-regular">Team: </span>{{ player.team }}
+        </div>
+      </div>
+    </div>
+
+  <div class="simple-keyboard" ></div>  
+
+</div>
