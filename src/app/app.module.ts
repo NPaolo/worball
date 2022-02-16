@@ -18,6 +18,7 @@ import { NgxGoogleAnalyticsModule } from 'ngx-google-analytics';
 import { HeaderComponent } from './header/header.component';
 import { NbaComponent } from './nba/nba.component';
 import { SerieAComponent } from './serie-a/serie-a.component';
+import { MatRippleModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { SerieAComponent } from './serie-a/serie-a.component';
     MatSnackBarModule,
     MatIconModule,
     MatMenuModule,
+    MatRippleModule,
     BrowserAnimationsModule,
     NgxGoogleAnalyticsModule.forRoot('G-Z7KXKM6680'),
   ],

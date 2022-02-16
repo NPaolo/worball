@@ -4,14 +4,21 @@
 
 .league-btn {
   height: 5rem;
-  background-color: #ffffff48;
+  background-color: whitesmoke;
+  color: #30336b !important;
   display: flex;
   align-items: center;
   width: 13rem;
   border-radius: 8px;
   border: 0px;
+  div, mat-icon {
+    color: #30336b;
+  }
 }
 .league-btn:hover {
-  background-color: #30336b;
-  transition-duration: 0.3s;
+  background-color: #ffffff48;
+  transition-duration: 0.2s;
+  div, mat-icon {
+    color: white !important;
+  }
 }
